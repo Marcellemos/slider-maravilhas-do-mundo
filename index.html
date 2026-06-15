@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-br" style="">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>7 Maravilhas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link src="./styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#dae2fd",
+                    "primary-fixed": "#7df4ff",
+                    "secondary": "#d1bcff",
+                    "error-container": "#93000a",
+                    "surface": "#0b1326",
+                    "primary": "#dbfcff",
+                    "background": "#0b1326",
+                    "surface-dim": "#0b1326",
+                    "primary-container": "#00f0ff",
+                    "on-surface-variant": "#b9cacb",
+                    "surface-container": "#171f33",
+                    "surface-container-low": "#131b2e",
+                    "inverse-surface": "#dae2fd",
+                    "surface-tint": "#00dbe9",
+                    "surface-container-lowest": "#060e20",
+                    "on-secondary-container": "#ddcdff",
+                    "on-primary": "#00363a",
+                    "on-secondary": "#3c0090",
+                    "surface-variant": "#2d3449",
+                    "outline-variant": "#3b494b",
+                    "on-secondary-fixed": "#23005b",
+                    "on-primary-fixed": "#002022",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-surface": "#dae2fd",
+                    "tertiary": "#eef7fd",
+                    "tertiary-container": "#d2dbe1",
+                    "secondary-container": "#7000ff",
+                    "error": "#ffb4ab",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#2d3449",
+                    "on-error": "#690005",
+                    "inverse-primary": "#006970",
+                    "surface-bright": "#31394d",
+                    "primary-fixed-dim": "#00dbe9",
+                    "on-tertiary-fixed-variant": "#3f484d",
+                    "on-tertiary-fixed": "#141d21",
+                    "on-secondary-fixed-variant": "#5700c9",
+                    "secondary-fixed-dim": "#d1bcff",
+                    "outline": "#849495",
+                    "secondary-fixed": "#e9ddff",
+                    "on-primary-container": "#006970",
+                    "surface-container-high": "#222a3d",
+                    "on-tertiary-container": "#576065",
+                    "tertiary-fixed-dim": "#bfc8ce",
+                    "on-tertiary": "#293236",
+                    "inverse-on-surface": "#283044",
+                    "tertiary-fixed": "#dbe4ea"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "12px",
+                    "unit": "8px",
+                    "stack-md": "24px",
+                    "stack-lg": "48px",
+                    "container-padding": "40px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Montserrat"],
+                    "headline-sm": ["Montserrat"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Montserrat"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+
+</head>
+<body class="h-screen w-screen flex flex-col font-body-md text-body-md overflow-hidden select-none">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full backdrop-blur-md bg-surface/10 border-b border-white/15 flex justify-between items-center px-container-padding h-20 w-full z-50">
+<div class="flex items-center gap-stack-sm text-primary-fixed scale-95 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-headline-md text-headline-md font-bold text-primary-fixed drop-shadow-sm">Sete Maravilhas</span>
+</div>
+<button class="text-on-surface-variant hover:bg-white/10 transition-colors duration-300 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Slider Canvas -->
+<main class="relative flex-grow w-full overflow-hidden">
+<!-- Slides Container -->
+<div class="absolute inset-0 flex slide-transition" id="slider" style="transform: translateX(-200%);">
+<!-- Slide 1: China -->
+<div class="min-w-full h-full relative group">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCwr5ZS8lMv4rHUpmcAv2zxiQyfixrZ9w2-rRuwBVpenkx2bWZRJ-jiCvX7MVLpgQSPzGHdqRaC20ephDNgbFwWQrmoPcdJUmN-oeVt-jCLP6AiX-1rPCFfv4snfYygRo5giorkfMdsUyqv8R703ArMiaFvYVLTiXCXct621gk7sixetznT3iMDEZoydMjN8B5JMeDNOh6dWF69rK3R5OUN-5sJNL0f3AxPJP1VWpLFifCB8Ua23GWYmrMmIAS_fD7h1l4p2huU3b1c')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Muralha da China</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">Uma fortificação monumental que se estende por mais de 13.000 milhas, essa antiga maravilha simboliza séculos de história dinástica e brilhantismo arquitetônico.</p>
+</div>
+</div>
+<!-- Slide 2: Petra -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPDzlACv_NHl7IalN0Skex8h_FBBHzlMo_-8KoZeaxdpVEjQOJMpf8fDGddkhh7HMxH2jU2-CTTGCDmUF95BFj9H8zYTT310SYOR0jCRjsw56yrAZQoHINSP8Dg0aYnRZe8Ik9qmE0Sx4RAhgzSvI4FKGTedj3AVca0X2FpXzvA-GXZ6WznQbx-6GST8-bvgqhSLLyWemHdcLfxfkoOemxkV9xTVhfx64Wp01r_e5yi-7EESXymgks7-xcqNsCiw6mtd2Ue5yRP9v3')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Petra</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">Esculpida em vibrantes penhascos de arenito vermelho, a 'Cidade das Rosas' da Jordânia revela a engenhosidade sofisticada da civilização nabateia.</p>
+</div>
+</div>
+<!-- Slide 3: Christ the Redeemer -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBCPCtczYmzFUHOz1LzIEF8_xmrK04XrTX54zb8nzOISe-rjf8o5nitJVAcD45ccgAiLMHn5KorQlLRI_RolLXAMjtHUWapZHsN_UtfOUQK5Gvy9H0hCNCZZNtTc3ZcrLUZPT03wHyUFGqISTs1zjGaeaBTrlYCocX-Lh33PeeGGGCvcmskci3OW1krdM7PhQsRpVuS0E2aLCNkgSyYr4LA8MDWmI4pC0qRRjn-i9dix1tO41qlpEQ5YncBOyufaWNCVw_w_9UT8x9_')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-100 translate-y-0">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Cristo Redentor</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">Olhando para o Rio de Janeiro, esta imponente obra-prima Art Déco se destaca como um símbolo global de paz e identidade cultural.</p>
+</div>
+</div>
+<!-- Slide 4: Machu Picchu -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCUYupYQoVOmaIMMdKTWgvzMoSTBYkq1OXOhqB4GH1JzmPT5ae3IKmXToYeitqVIMu3mW_v_dP-zyb95dlb4px0uvGxpujNc7k-c2-tBRbvY51nfWKmmz2a1fk1rt4SssgokCUzw22Ts2dGCv2Q5m6KEwzmRsKrhhnw76fQQhizo_iEP7-XJ4qLmHLiN58ig2vWMPE97vpOu6kmkEwajCBrIQQFU7tiG_kD5gDhCwU4sxyR1tzENaTZAdgVjpzo8LF8Uwn9lOosHj1o')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Machu Picchu</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">Aninhada nas alturas dos Andes, esta cidadela Inca do século XV continua sendo um dos sítios arqueológicos mais enigmáticos e bonitos do mundo.</p>
+</div>
+</div>
+<!-- Slide 5: Chichén Itzá -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA6paZazs6c5V57RHJP8MhNttEGIagWRvpyFTTEMjp37GP0aRnd2RlBLOweaKs29-Rn8IzGL1jR6N0uwP20jFsdmLaiBVuUJ6qQWDlINxzrcQIdCegPBFSwla4WKhqmHSbi7HUqP8pDO19y7nUy1FIRAEBETVFysgICY3_FWJFKHXffNythZKIT6zCgpVSkPUWw__iithkHFajkXjaeMl3GlBeeLryaqv1p1rOdGDcGxdu2-DLlv8nTaypQ2wp4q2ibol6qirMgnBRW')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Chichén Itzá</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">A pirâmide de El Castillo é um triunfo matemático e astronômico da civilização maia no coração do Yucatán.</p>
+</div>
+</div>
+<!-- Slide 6: Colosseum -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDK0tYDsL0MB1p2NP22SZbJQ7BnkHKOKSvJE7zdLom3BSRwfuppGKVLYT3m51Tz5F1iPvqiNIalqrscs-D9YZq66QnJDagdILhlC6PC0Fdodcik59pkMrdXzY0M7VTu71AfWif3-yysKwTVUU4qDy-hXblIFoeUcTjPYmFx0vY3l0f9bK_hOsEx90OKIb1Lcz-1mGTTSTMOZg4HGuWsp-QMF2PI5CYneotMI02cn1HMYVNyVY55MVMZ0uSsogAuzQjc9mYIxtMilaHK')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Coliseu</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">O maior anfiteatro do Império Romano, onde a história gladiatorial encontra um legado arquitetônico sem igual.</p>
+</div>
+</div>
+<!-- Slide 7: Taj Mahal -->
+<div class="min-w-full h-full relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNQ3OoTHBZLBXP_1TRMMt5Tqv-c4HBcyN69crR1yphWOawLRBWXuVUSkClyuOT05uxfeM_b9fn0g-EmWAbfPnvMSwxkca1q96Y4AYAuRo5ATLVyNFYtmUlEblTfJeO2sjjWqX8VUn3RK08j1-iKwOF2O-06MUggYZM2uzfJWyAHsEqjwY95TyXP4hLX2jLGjSJctbEloJe8OjQ57JPcBK6EJHwo__El9lngGySjU4Z8N-empZDwB9Hcbf-BnJjyN_L9vfcYvYv4vkf')">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+</div>
+<div class="absolute bottom-stack-lg left-container-padding z-20 max-w-xl slide-content transition-all duration-700 opacity-0 translate-y-10">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-stack-sm">Taj Mahal</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant glass-panel p-6 rounded-xl">Um mausoléu de mármore branco-ivory às margens do rio Yamuna, criado como um monumento eterno ao amor e à arte Mughal.</p>
+</div>
+</div>
+</div>
+<!-- Progress and Controls (Floating Islands) -->
+<!-- Navigation Controls -->
+<div class="absolute inset-y-0 left-0 flex items-center px-container-padding z-40 pointer-events-none">
+  <button class="glass-panel active-glass p-4 rounded-full text-primary-fixed hover:bg-white/10 transition-all active:scale-90 pointer-events-auto" id="prevBtn">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </button>
+</div>
+<div class="absolute inset-y-0 right-0 flex items-center px-container-padding z-40 pointer-events-none">
+  <button class="glass-panel active-glass p-4 rounded-full text-primary-fixed hover:bg-white/10 transition-all active:scale-90 pointer-events-auto" id="nextBtn">
+    <span class="material-symbols-outlined">chevron_right</span>
+  </button>
+</div>
+<!-- Pagination Indicator -->
+<div class="absolute bottom-32 left-1/2 -translate-x-1/2 flex items-center gap-2 z-40" id="pagination">
+  <!-- Pills will be generated by JS -->
+</div>
+<!-- Progress Bar (Auto-play indicator) -->
+<div class="fixed top-20 left-0 w-full h-0.5 bg-white/10 z-50">
+<div class="h-full bg-primary-container progress-glow transition-all duration-[5000ms] ease-linear" id="progressFill" style="width: 100%; transition: width 5000ms linear;"></div>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<script src="./scripts.js"></script>
+
+</body>
+</html>
