@@ -1,26 +1,269 @@
-.glass-panel {
-            backdrop-filter: blur(32px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        .active-glass {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
-        }
-        .slide-transition {
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s ease;
-        }
-        .progress-glow {
-            box-shadow: 0 0 8px #00f0ff;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            background-color: #0b1326;
-            color: #dae2fd;
-            overflow: hidden;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+ /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:       #C9A84C;
+      --gold-dim:   rgba(201, 168, 76, 0.35);
+      --ink:        #0a0a0a;
+      --snow:       #F5F5F0;
+      --overlay-b:  rgba(0, 0, 0, 0.55);
+      --transition-dur: 900ms;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: var(--ink);
+      overflow: hidden;
+      font-family: 'Lato', sans-serif;
+      color: var(--snow);
+    }
+
+    /* ─── Slider Shell ──────────────────────────────────── */
+    #slider {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ─── Slides ────────────────────────────────────────── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-dur) ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Video full-cover */
+    .slide video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
+      transition: transform 1.4s ease;
+      will-change: transform;
+    }
+
+    .slide.active video {
+      transform: scale(1);
+    }
+
+    /* Dark gradient overlay for legibility */
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top,  rgba(0,0,0,0.82) 0%,  rgba(0,0,0,0.20) 45%, transparent 70%),
+        linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ─── Slide Content ─────────────────────────────────── */
+    .slide-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 0 5vw 7vh;
+      z-index: 10;
+      max-width: 700px;
+      transform: translateY(18px);
+      opacity: 0;
+      transition: transform 0.85s ease 0.3s, opacity 0.85s ease 0.3s;
+    }
+
+    .slide.active .slide-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .wonder-number {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .slide-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      line-height: 1.05;
+      color: var(--snow);
+      text-shadow: 0 2px 24px rgba(0,0,0,0.7);
+      margin-bottom: 1rem;
+    }
+
+    .slide-desc {
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+      line-height: 1.75;
+      color: rgba(245, 245, 240, 0.82);
+      max-width: 520px;
+    }
+
+    /* Gold accent line */
+    .accent-line {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s ease 0.55s, opacity 0.6s ease 0.55s;
+    }
+
+    .slide.active .accent-line {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    /* ─── Roman Numeral Counter ─────────────────────────── */
+    #roman-counter {
+      position: absolute;
+      top: 50%;
+      right: 5vw;
+      transform: translateY(-50%);
+      z-index: 20;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(5rem, 12vw, 10rem);
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold-dim);
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    /* ─── Navigation Buttons ────────────────────────────── */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 30;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s;
+    }
+
+    .nav-btn:hover .nav-inner { border-color: var(--gold); }
+    .nav-btn:hover .nav-inner svg { stroke: var(--gold); }
+
+    .nav-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+
+    .nav-inner {
+      width: 52px;
+      height: 52px;
+      border: 1.5px solid rgba(245, 245, 240, 0.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s;
+      backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .nav-inner svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(245, 245, 240, 0.75);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s;
+    }
+
+    #btn-prev { left: 3vw; }
+    #btn-next { right: 3vw; }
+
+    /* ─── Progress Dots ─────────────────────────────────── */
+    #dots {
+      position: absolute;
+      bottom: 3.5vh;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 30;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(245, 245, 240, 0.35);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.35s, transform 0.35s;
+    }
+
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.5);
+    }
+
+    /* ─── Top Bar ───────────────────────────────────────── */
+    #top-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 30;
+      padding: 2.2rem 5vw 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #logo {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+      letter-spacing: 0.3em;
+      color: rgba(245, 245, 240, 0.55);
+      text-transform: uppercase;
+    }
+
+    #slide-count {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: rgba(245, 245, 240, 0.45);
+    }
+
+    #slide-count span {
+      color: var(--gold);
+    }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 600px) {
+      #roman-counter { display: none; }
+      #btn-prev { left: 1.5vw; }
+      #btn-next { right: 1.5vw; }
+      .slide-content { padding: 0 6vw 10vh; }
+    }
+
+    /* ─── Reduced motion ────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .slide video, .slide-content, .accent-line {
+        transition-duration: 50ms !important;
+      }
+    }

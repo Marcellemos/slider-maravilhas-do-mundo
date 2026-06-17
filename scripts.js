@@ -1,108 +1,98 @@
-document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.getElementById('slider');
-            const slides = document.querySelectorAll('#slider > div');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const pagination = document.getElementById('pagination');
-            const progressFill = document.getElementById('progressFill');
-            
-            let currentIndex = 0;
-            const totalSlides = slides.length;
-            const autoplaySpeed = 5000;
-            let autoplayInterval;
-            let touchStartX = 0;
-            let touchEndX = 0;
+(() => {
+      const slides      = Array.from(document.querySelectorAll('.slide'));
+      const videos      = slides.map(s => s.querySelector('video'));
+      const dotsNav     = document.getElementById('dots');
+      const romanEl     = document.getElementById('roman-counter');
+      const countEl     = document.getElementById('count-current');
+      const btnPrev     = document.getElementById('btn-prev');
+      const btnNext     = document.getElementById('btn-next');
 
-            // Initialize Pagination
-            slides.forEach((_, i) => {
-                const pill = document.createElement('div');
-                pill.className = `h-2 rounded-full transition-all duration-300 cursor-pointer ${i === 0 ? 'w-8 bg-primary-container' : 'w-2 bg-white/20 hover:bg-white/40'}`;
-                pill.addEventListener('click', () => goToSlide(i));
-                pagination.appendChild(pill);
-            });
+      const ROMAN = ['I','II','III','IV','V','VI','VII'];
+      let current  = 0;
+      let animating = false;
 
-            const updatePagination = () => {
-                const pills = pagination.querySelectorAll('div');
-                pills.forEach((pill, i) => {
-                    if (i === currentIndex) {
-                        pill.className = 'h-2 w-8 bg-primary-container rounded-full transition-all duration-300';
-                    } else {
-                        pill.className = 'h-2 w-2 bg-white/20 rounded-full transition-all duration-300 hover:bg-white/40';
-                    }
-                });
-            };
+      /* ── Build dots ─────────────────────────────── */
+      const dots = slides.map((_, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'dot' + (i === 0 ? ' active' : '');
+        btn.setAttribute('aria-label', `Ir para slide ${i + 1}`);
+        btn.addEventListener('click', () => goTo(i));
+        dotsNav.appendChild(btn);
+        return btn;
+      });
 
-            const animateContent = (index) => {
-                const allContent = document.querySelectorAll('.slide-content');
-                allContent.forEach((el, i) => {
-                    if (i === index) {
-                        setTimeout(() => {
-                            el.classList.remove('opacity-0', 'translate-y-10');
-                            el.classList.add('opacity-100', 'translate-y-0');
-                        }, 200);
-                    } else {
-                        el.classList.add('opacity-0', 'translate-y-10');
-                        el.classList.remove('opacity-100', 'translate-y-0');
-                    }
-                });
-            };
+      /* ── Go to slide ────────────────────────────── */
+      function goTo(next) {
+        if (animating || next === current) return;
+        animating = true;
 
-            const resetProgressBar = () => {
-                progressFill.style.transition = 'none';
-                progressFill.style.width = '0%';
-                setTimeout(() => {
-                    progressFill.style.transition = `width ${autoplaySpeed}ms linear`;
-                    progressFill.style.width = '100%';
-                }, 50);
-            };
+        const prev = current;
 
-            const goToSlide = (index) => {
-                currentIndex = index;
-                if (currentIndex >= totalSlides) currentIndex = 0;
-                if (currentIndex < 0) currentIndex = totalSlides - 1;
-                
-                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-                updatePagination();
-                animateContent(currentIndex);
-                startAutoplay();
-            };
+        // Pause & reset old video
+        videos[prev].pause();
+        videos[prev].currentTime = 0;
 
-            const startAutoplay = () => {
-                clearInterval(autoplayInterval);
-                resetProgressBar();
-                autoplayInterval = setInterval(() => {
-                    goToSlide(currentIndex + 1);
-                }, autoplaySpeed);
-            };
+        // Deactivate old slide
+        slides[prev].classList.remove('active');
+        dots[prev].classList.remove('active');
 
-            // Event Listeners
-            prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-            nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        // Activate new slide
+        current = next;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
 
-            // Keyboard Nav
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') goToSlide(currentIndex - 1);
-                if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
-            });
+        // Update UI labels
+        updateLabels();
 
-            // Touch support
-            slider.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, {passive: true});
+        // Play new video
+        videos[current].play().catch(() => {/* autoplay blocked – user will interact */});
 
-            slider.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, {passive: true});
+        // Unlock after transition
+        setTimeout(() => { animating = false; }, 950);
+      }
 
-            const handleSwipe = () => {
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) goToSlide(currentIndex + 1);
-                    else goToSlide(currentIndex - 1);
-                }
-            };
+      function updateLabels() {
+        romanEl.style.opacity = '0';
+        setTimeout(() => {
+          romanEl.textContent = ROMAN[current];
+          countEl.textContent  = current + 1;
+          romanEl.style.opacity = '1';
+        }, 200);
+      }
 
-            // Init call
-            goToSlide(0);
+      /* ── Infinite navigation ────────────────────── */
+      function next() { goTo((current + 1) % slides.length); }
+      function prev() { goTo((current - 1 + slides.length) % slides.length); }
+
+      btnNext.addEventListener('click', next);
+      btnPrev.addEventListener('click', prev);
+
+      /* ── Keyboard ───────────────────────────────── */
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft')  prev();
+      });
+
+      /* ── Autoplay on video end ──────────────────── */
+      videos.forEach((vid, i) => {
+        vid.addEventListener('ended', () => {
+          if (i === current) next();
         });
+      });
+
+      /* ── Touch / swipe ──────────────────────────── */
+      let touchStartX = 0;
+      const slider = document.getElementById('slider');
+
+      slider.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      slider.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+      }, { passive: true });
+
+      /* ── Autoplay first slide ───────────────────── */
+      videos[0].play().catch(() => {});
+    })();
