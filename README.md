@@ -1,33 +1,39 @@
 # Slider Maravilhas do Mundo
 
-Pequeno projeto de slider/carrossel que apresenta imagens das maravilhas do mundo.
+Uma apresentação web simples das 7 Maravilhas do Mundo Moderno, construída com HTML, CSS e JavaScript.
 
 ## Visão geral
 
-Este projeto é uma implementação simples de um slider em JavaScript puro, com estilos em CSS e estrutura em HTML.
+- Exibe um slider de vídeo com informações sobre cada maravilha.
+- Inclui navegação por botões, pontos, teclado e gestos de toque.
+- Cada slide reproduz automaticamente o vídeo associado e avança para o próximo slide ao término.
+
+## Estrutura do projeto
+
+- `index.html` - marcação do slider e elementos da interface.
+- `styles.css` - estilos visuais e layout responsivo.
+- `scripts.js` - lógica de navegação, reprodução de vídeo e interação do usuário.
+- `videos/` - vídeos usados em cada slide.
 
 ## Como usar
 
-- Abra o arquivo [index.html](index.html#L1) em um navegador moderno.
-- Ou sirva a pasta com um servidor local (ex.: `npx http-server`), útil para testes com módulos ou fetch.
+1. Abra `index.html` em um navegador moderno.
+2. Use os botões anterior/próximo ou pressione `←` / `→` para navegar.
+3. Toque no slider em dispositivos móveis para alternar entre os slides.
+4. Cada slide está associado a um vídeo que é reproduzido automaticamente quando ativado.
 
-## Estrutura de arquivos
+## Requisitos
 
-- [index.html](index.html#L1) — página principal
-- [styles.css](styles.css#L1) — estilos
-- [scripts.js](scripts.js#L1) — lógica do slider
+- Navegador compatível com HTML5, CSS e elementos `<video>`.
+- Permissões de reprodução automática de mídia podem exigir interação do usuário.
 
-## Tecnologias
+## Notas
 
-- HTML
-- CSS
-- JavaScript (vanilla)
+- Os vídeos estão incluídos na pasta `videos/` e devem ser mantidos no mesmo diretório do projeto.
+- A fonte usada no layout é carregada via Google Fonts.
 
-## Contribuição
+## Desenvolvimento
 
-Pull requests são bem-vindos. Para mudanças maiores, abra primeiro uma issue para discutir o plano.
+- Faça alterações em `styles.css` para ajustar o visual.
+- Edite `scripts.js` para ajustar a navegação, reprodução ou comportamento dos slides.
 
-## Licença
-
-Projeto disponível sob a licença MIT.
-# slider-maravilhas-do-mundo
